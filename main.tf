@@ -7,10 +7,7 @@ module "subnets" {
   source = "./modules/subnets"
   vpc_id = module.vpc.vpc_id.id
   public_subnet_1 = var.public_subnet_1
-  private_subnet_1 = var.private_subnet_1
-  private_subnet_2 = var.private_subnet_2
   az_1 = var.az_1
-  az_2 = var.az_2
 }
 
 module "security_group" {
@@ -27,13 +24,7 @@ module "route_table" {
 module "rt_association" {
   source = "./modules/rt_association"
   public_subnet_1 = module.subnets.public_subnet_1
-  private_subnet_1 = module.subnets.private_subnet_1
-  private_subnet_2 = module.subnets.private_subnet_2
-  intern_2_devops_public_route_table = module.route_table.intern_2_devops_route_tables[1]
-  intern_2_devops_private_route_table = module.route_table.intern_2_devops_route_tables[0]
- 
-  
-  
+  intern_2_devops_public_route_table = module.route_table.intern_2_devops_route_tables[1]  
 }
 
 module "ec2" {
